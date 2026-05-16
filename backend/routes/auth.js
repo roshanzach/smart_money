@@ -35,7 +35,7 @@ router.post('/register', async (req, res) => {
     res.status(201).json({ token });
   } catch (err) {
     console.error(err.message);
-    res.status(500).send('Server Error');
+    res.status(500).json({ message: 'Server Error' });
   }
 });
 
@@ -63,7 +63,7 @@ router.post('/login', async (req, res) => {
     res.json({ token });
   } catch (err) {
     console.error(err.message);
-    res.status(500).send('Server Error');
+    res.status(500).json({ message: 'Server Error' });
   }
 });
 

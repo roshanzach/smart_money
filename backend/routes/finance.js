@@ -16,7 +16,7 @@ router.get('/transactions', async (req, res) => {
     res.json(transactions);
   } catch (err) {
     console.error(err.message);
-    res.status(500).send('Server Error');
+    res.status(500).json({ message: 'Server Error' });
   }
 });
 
@@ -38,7 +38,7 @@ router.post('/transactions', async (req, res) => {
     res.json(transaction);
   } catch (err) {
     console.error(err.message);
-    res.status(500).send('Server Error');
+    res.status(500).json({ message: 'Server Error' });
   }
 });
 
@@ -63,7 +63,7 @@ router.delete('/transactions/:id', async (req, res) => {
     if (err.kind === 'ObjectId') {
       return res.status(404).json({ message: 'Transaction not found' });
     }
-    res.status(500).send('Server Error');
+    res.status(500).json({ message: 'Server Error' });
   }
 });
 
@@ -80,7 +80,7 @@ router.get('/budget', async (req, res) => {
     res.json(budget);
   } catch (err) {
     console.error(err.message);
-    res.status(500).send('Server Error');
+    res.status(500).json({ message: 'Server Error' });
   }
 });
 
@@ -108,7 +108,7 @@ router.put('/budget', async (req, res) => {
     res.json(budget);
   } catch (err) {
     console.error(err.message);
-    res.status(500).send('Server Error');
+    res.status(500).json({ message: 'Server Error' });
   }
 });
 
