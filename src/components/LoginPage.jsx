@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { LogIn, Mail, Lock, UserPlus } from 'lucide-react';
 
+const API_URL = import.meta.env.PROD ? 'https://smart-money-rbdu.onrender.com' : '';
+
 const LoginPage = ({ onLogin }) => {
   const [isRegistering, setIsRegistering] = useState(false);
   const [email, setEmail] = useState('');
@@ -14,7 +16,7 @@ const LoginPage = ({ onLogin }) => {
     setLoading(true);
 
     try {
-      const endpoint = isRegistering ? '/api/auth/register' : '/api/auth/login';
+      const endpoint = isRegistering ? `${API_URL}/api/auth/register` : `${API_URL}/api/auth/login`;
       const response = await fetch(endpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

@@ -2,6 +2,8 @@ import { createContext, useContext, useState, useEffect, useMemo } from 'react';
 
 const FinanceContext = createContext();
 
+const API_URL = import.meta.env.PROD ? 'https://smart-money-rbdu.onrender.com' : '';
+
 // eslint-disable-next-line react-refresh/only-export-components
 export const useFinance = () => useContext(FinanceContext);
 
@@ -21,8 +23,8 @@ export const FinanceProvider = ({ children }) => {
       const headers = { 'Authorization': `Bearer ${token}` };
       
       const [txRes, budgetRes] = await Promise.all([
-        fetch('/api/finance/transactions', { headers }),
-        fetch('/api/finance/budget', { headers })
+        fetch(`${API_URL}/api/finance/transactions`, { headers }),
+        fetch(`${API_URL}/api/finance/budget`, { headers })
       ]);
 
       if (txRes.ok && budgetRes.ok) {
@@ -43,7 +45,7 @@ export const FinanceProvider = ({ children }) => {
     if (!token) return;
 
     try {
-      const res = await fetch('/api/finance/transactions', {
+      const res = await fetch(`${API_URL}/api/finance/transactions`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -65,7 +67,7 @@ export const FinanceProvider = ({ children }) => {
     if (!token) return;
 
     try {
-      const res = await fetch(`/api/finance/transactions/${id}`, {
+      const res = await fetch(`${API_URL}/api/finance/transactions/${id}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` }
       });
@@ -82,7 +84,7 @@ export const FinanceProvider = ({ children }) => {
     if (!token) return;
 
     try {
-      const res = await fetch('/api/finance/budget', {
+      const res = await fetch(`${API_URL}/api/finance/budget`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
